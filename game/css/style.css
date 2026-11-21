@@ -1,0 +1,257 @@
+/* style.css — tampilan "Senja di Pelabuhan": hangat, kontras tinggi, mudah dibaca. */
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: #1c1030;
+  color: #fdf6ec;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 16px 14px;
+}
+
+/* ---------- bar atas ---------- */
+
+.hud {
+  width: 100%;
+  max-width: 1180px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 4px 10px;
+}
+
+.title-block h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+  letter-spacing: 0.5px;
+  color: #ffd9a0;
+}
+
+.title-block p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #d9b8e6;
+}
+
+.counter {
+  text-align: center;
+  background: #2c1b3d;
+  border: 2px solid #ff9a3c;
+  border-radius: 12px;
+  padding: 6px 22px;
+  min-width: 190px;
+}
+
+.counter .label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffb37a;
+}
+
+.counter .value {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff3b0;
+}
+
+.counter .value.done { color: #7ee2a0; }
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat {
+  text-align: center;
+  background: #2c1b3d;
+  border: 1px solid #5d4666;
+  border-radius: 10px;
+  padding: 5px 12px;
+  min-width: 86px;
+}
+
+.stat .label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #c9a8d8;
+}
+
+.stat .value {
+  font-size: 21px;
+  font-weight: 700;
+  color: #fdf6ec;
+}
+
+.stat .value.low-time { color: #ff6b6b; }
+
+button {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2c1b3d;
+  background: #ff9a3c;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+button:hover { background: #ffb37a; }
+button:disabled { background: #6b5a78; color: #c9b8d0; cursor: default; }
+button.secondary { background: #7ee2a0; }
+button.secondary:hover { background: #a5eebd; }
+
+/* ---------- panggung dua panel ---------- */
+
+.stage {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1180px;
+}
+
+.panel { width: 580px; max-width: calc(50% - 10px); }
+
+.panel .caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 4px 5px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffd9a0;
+}
+
+.panel .caption .tag {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #c9a8d8;
+}
+
+.panel canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 3px solid #ff9a3c;
+  border-radius: 8px;
+  cursor: crosshair;
+  background: #0a3348;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
+
+.panel canvas.shake { animation: shake 0.25s ease-in-out; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* ---------- kaki halaman ---------- */
+
+.footer {
+  width: 100%;
+  max-width: 1180px;
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  color: #d9b8e6;
+}
+
+.footer .found-list { color: #7ee2a0; }
+
+/* ---------- layar overlay (mulai / menang) ---------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 8, 36, 0.78);
+  z-index: 10;
+}
+
+.overlay.hidden { display: none; }
+
+.card {
+  width: min(560px, 92vw);
+  background: #2c1b3d;
+  border: 2px solid #ff9a3c;
+  border-radius: 16px;
+  padding: 28px 32px;
+  text-align: center;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+}
+
+.card h2 {
+  margin: 0 0 6px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 34px;
+  color: #ffd9a0;
+}
+
+.card p { margin: 8px 0; font-size: 15px; line-height: 1.55; color: #f3e6ff; }
+.card .rules { text-align: left; font-size: 14px; }
+.card .rules b { color: #ffd9a0; }
+
+.card .big-score {
+  font-size: 44px;
+  font-weight: 800;
+  color: #7ee2a0;
+  margin: 6px 0;
+}
+
+.card .result-row {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  margin: 10px 0 18px;
+  font-size: 15px;
+}
+
+.card .result-row b { display: block; font-size: 22px; color: #fff3b0; }
+
+.card button { font-size: 17px; padding: 12px 26px; margin-top: 6px; }
+.card .keys { margin-top: 14px; font-size: 12px; color: #c9a8d8; }
+
+/* ---------- pesan singkat ---------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  background: #2c1b3d;
+  border: 1px solid #ff9a3c;
+  color: #fff3b0;
+  border-radius: 10px;
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 20;
+}
+
+.toast.show { opacity: 1; }

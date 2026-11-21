@@ -1,19 +1,84 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Block Dodger</title>
-<style>
-  html, body { margin: 0; height: 100%; overflow: hidden; background: #11141b; }
-  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
-  /* Read aloud, never shown: the status line screen readers announce. */
-  #status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-</style>
+<title>Senja di Pelabuhan — Cari 10 Perbedaan</title>
+<link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-<canvas id="game" aria-label="Block Dodger: move the paddle left and right to dodge falling blocks and catch coins"></canvas>
-<p id="status" role="status" aria-live="polite"></p>
-<script type="module" src="./src/main.js"></script>
+<header class="hud">
+  <div class="title-block">
+    <h1>Senja di Pelabuhan</h1>
+    <p>Cari 10 perbedaan antara dua gambar pelabuhan saat senja.</p>
+  </div>
+  <div class="counter" aria-live="polite">
+    <div class="label" id="counter-label">Perbedaan tersisa</div>
+    <div class="value" id="counter-value">10 / 10</div>
+  </div>
+  <div class="stats">
+    <div class="stat">
+      <div class="label">Waktu</div>
+      <div class="value" id="timer-value">00:00</div>
+    </div>
+    <div class="stat">
+      <div class="label">Skor</div>
+      <div class="value" id="score-value">1000</div>
+    </div>
+    <button id="hint-button" type="button" title="Petunjuk (H): +20 detik, -50 poin">Petunjuk (H)</button>
+    <button id="restart-button" class="secondary" type="button" title="Mulai lagi (R)">Ulang (R)</button>
+  </div>
+</header>
+
+<main class="stage">
+  <section class="panel">
+    <div class="caption"><span>Panel Kiri — Asli</span><span class="tag">klik perbedaannya</span></div>
+    <canvas id="panel-left" width="560" height="420" aria-label="Panel kiri adegan pelabuhan saat senja"></canvas>
+  </section>
+  <section class="panel">
+    <div class="caption"><span>Panel Kanan — Berbeda</span><span class="tag">klik perbedaannya</span></div>
+    <canvas id="panel-right" width="560" height="420" aria-label="Panel kanan adegan pelabuhan saat senja"></canvas>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>Klik perbedaan di panel mana pun — marker hijau muncul di kedua panel. Tombol H = petunjuk (+20 dtk, -50 poin), R = mulai lagi.</span>
+  <span class="found-list" id="found-list"></span>
+</footer>
+
+<div class="overlay" id="start-overlay">
+  <div class="card">
+    <h2>Senja di Pelabuhan</h2>
+    <p>Dua gambar pelabuhan saat senja terlihat sama — tapi ada <b>10 perbedaan</b> tersembunyi di antaranya.</p>
+    <p class="rules">
+      <b>Cara bermain:</b> klik perbedaan di panel kiri atau kanan. Setiap temuan ditandai lingkaran hijau bernomor di kedua panel.<br>
+      <b>Petunjuk (H):</b> berkedip di salah satu perbedaan yang belum ketemu — harganya +20 detik dan -50 poin.<br>
+      <b>Skor:</b> mulai dari 1000, berkurang seiring waktu, klik salah (-10), dan petunjuk (-50). Selesai di bawah 3 menit dapat bonus.
+    </p>
+    <button id="start-button" type="button">Mulai Bermain</button>
+    <p class="keys">Mouse: klik &nbsp;·&nbsp; Keyboard: H petunjuk, R mulai lagi, Enter mulai</p>
+  </div>
+</div>
+
+<div class="overlay hidden" id="win-overlay">
+  <div class="card">
+    <h2 id="win-title">Menang!</h2>
+    <p>Semua 10 perbedaan di pelabuhan berhasil ditemukan.</p>
+    <div class="big-score" id="win-score">0</div>
+    <div class="result-row">
+      <span>Waktu<b id="win-time">00:00</b></span>
+      <span>Klik salah<b id="win-wrong">0</b></span>
+      <span>Petunjuk<b id="win-hints">0</b></span>
+    </div>
+    <button id="again-button" type="button">Main Lagi (R)</button>
+    <p class="keys">Bisakah kamu menang lebih cepat lain kali?</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="./js/differences.js"></script>
+<script src="./js/scene.js"></script>
+<script src="./js/game.js"></script>
 </body>
 </html>
