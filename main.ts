@@ -1,3 +1,17 @@
+// Senja di Pelabuhan — our entry for the make.fun "best spot the difference" bounty.
+// The game is a hand-drawn harbour at dusk, painted procedurally on canvas: two panels
+// side by side show the same sunset scene, and the player hunts for ten quiet differences
+// between them — a missing boat here, a recoloured lantern there. Clicking a real difference
+// circles it on both panels; a counter shows how many are left, a timer keeps the pressure
+// on, and a hint button briefly flashes the area of an unfound difference. Find all ten and
+// the win screen appears.
+//
+// This program is the hand-in step. It copies the finished game (game/) and the screenshots
+// we rendered from it (screenshots/) into the output folder, then writes dossier.json —
+// the summary the judge reads — using the vendored make.fun library. Run it locally with
+// MAKEFUN_OUTPUT_DIR set to a scratch folder to check the output before submitting.
+import { readdirSync } from 'node:fs';
+
 // A working best-game-01 entry (Node 22, standard library only): the game is this directory's
 // game/ folder, plain static files a desktop browser loads offline (game/index.html and its ES
 // modules, no library and no network request), and the program hands it in. It copies game/ and
@@ -39,3 +53,12 @@ writeFileSync(
     game_path_max_bytes: 1000,
   }),
 );
+
+// A one-line build summary for the person running this by hand: the game name plus how many
+// screenshots were handed in alongside it, so a glance at the terminal confirms the entry
+// is complete without opening the output folder.
+const shotDir = join(here, 'screenshots');
+const shotCount = existsSync(shotDir)
+  ? readdirSync(shotDir).filter((name) => /\.(png|jpe?g)$/i.test(name)).length
+  : 0;
+console.log(`Senja di Pelabuhan — handed in game/ plus ${shotCount} screenshot(s) and dossier.json.`);
